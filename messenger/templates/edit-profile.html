@@ -1,0 +1,40 @@
+<div class="container custom-scrollbar">
+    <div class="header">
+        <a href="/settings" class="button-circle" aria-label="Close section" title="Close section" data-routing-link>
+            <i class="fa-solid fa-arrow-left-long"></i>
+        </a>
+        <h3>Edit Profile</h3>
+    </div>
+    <form method="post" action="{{url_for('edit_profile')}}" id="edit-profile-form" enctype="multipart/form-data" class="edit-chat-form">
+        {{ form.hidden_tag() }}
+        <fieldset>
+            <div class="image-container">
+                <div class="image-wrapper" id="profile-image-wrapper" style="
+                    background-image: url({{user_info.avatar}});
+                ">
+                    <i class="fa-solid fa-camera-retro upper-icon"></i>
+                    {{ form.avatar(id="profile-file-input")}}
+                </div>
+            </div>
+            <div class="input-container">
+                <p class="input-description">First name (required)</p>
+                {{ form.first_name(value=user_info.first_name)}}
+            </div>
+            <div class="input-container">
+                <p class="input-description">Last name (optional)</p>
+                {{ form.last_name(value=user_info.last_name)}}
+            </div>
+            <div class="input-container">
+                <p class="input-description">Bio</p>
+                {{ form.bio(class="bio", placeholder="Any details about yourself", value=user_info.bio) }}
+            </div>
+        </fieldset>
+        <div class="poping-submit-container">
+            <i class="fa-solid fa-check"></i>
+            {{ form.submit(class='edit-profile-submit') }}
+        </div>
+    </form>
+    <div class="black-line"></div>
+</div>
+<script src="{{url_for('static', filename='js/editProfile.js')}}"></script>
+<script src="{{url_for('static', filename='js/edit-image-handler.js')}}"></script>

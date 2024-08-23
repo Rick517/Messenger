@@ -1,0 +1,223 @@
+.container {
+    overflow-y: scroll;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    height: 3.7rem;
+    padding-inline: .2rem;
+}
+
+.header h3 {
+    flex: 1;
+    color:white;
+    margin-left: .3rem;
+}
+
+.header .button-circle {
+    color: var(--text-gray-color) !important;
+    margin-inline: .2rem;
+}
+
+
+.person-info .avatar-background {
+    aspect-ratio: 1/1;
+    width: 100%;
+    background-size: 100% 100%;
+    position: relative;
+    box-shadow: inset 0 -80px 40px -10px rgba(0, 0, 0, 0.4);
+}
+
+.person-info .description {
+    position: absolute;
+    bottom: .3rem;
+    left: 1rem;
+}
+
+.person-info .description div, .person-info .description i {
+    pointer-events: none !important;
+}
+
+.person-info .description .name {
+    color: white !important;
+    font-weight: 500;
+    font-size: 1.1rem;
+    margin-bottom: -.3rem
+}
+
+.person-info .btn-container {
+    width: 100%;
+    padding: .6rem;
+    margin-top: .3rem;
+}
+
+.person-info .btn-container i {
+    color: var(--text-gray-color);
+    font-size: 1.4rem;
+    aspect-ratio: 1/1;
+}
+
+.person-info .btn-container div {
+    margin-left: 7%;
+    text-align: start;
+}
+
+.person-info .btn-container .email {
+    color:white;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.person-info .btn-container .email-description {
+    color:var(--text-gray-color);
+    font-size: .875rem;
+}
+
+.person-info .btn-container button {
+    border:none;
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    transition: all .3s;
+    cursor: pointer;
+    padding: .6rem .8rem;
+}
+
+.person-info .btn-container button::before {
+    content: "";
+    position: absolute;
+    top:0;
+    bottom:0;
+    right:0;
+    left:0;
+    border-radius: 16% 10%;
+    transition: all .3s;
+    opacity: 0;
+}
+
+.person-info .btn-container button:hover::before {
+    display: initial;
+    background-color: white;
+    opacity: .1;
+
+}
+
+
+.black-line {
+    border: 7px solid var(--very-dark-color);
+}
+
+
+/* MEMBERS */
+
+.members {
+    margin-top: 2.3rem;
+    padding-bottom: 1rem;
+    padding-left: 1.3rem;
+    width: 100%;
+    font-size: 1rem;
+    border-bottom: 4px solid var(--darker-color);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    color:var(--text-gray-color);
+}
+
+.members-container {
+    margin-block: .2rem;
+    padding-inline: .2rem;
+    overflow-y: scroll;
+    height: 100%;
+}
+
+.container:hover .add-member-popup {
+    bottom: 3rem;
+}
+
+.add-member-popup {
+    position: fixed;
+    bottom: -4rem;
+    right: 1.7rem;
+    transition: all .15s;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-member-popup i {
+    pointer-events: none;
+}
+
+
+/* ADD MEMBERS */
+
+.full-height-container {
+    min-height: 100vh; /* By doing this we can prepend add-members instead of doing absolute blocks or another shit. */
+}
+
+.members-search-container {
+
+    padding-bottom: .5rem;
+    border-bottom: 1px solid var(--white-dull-color);
+    margin-bottom: .65rem;
+}
+
+#add-members-container .members-container {
+    padding-inline: .3rem;
+}
+
+.members-search-container input {
+    border: none;
+    background-color: transparent;
+    outline:none;
+    caret-color: var(--soft-aquamarine);
+    margin-left: 1.4rem;
+    color: var(--brilliant-white-color);
+    font-size: .95rem;
+    padding-block: .2rem;
+}
+
+.overlay {
+    z-index: 100;
+}
+
+.checkbox-container {
+    min-width: 1.2rem;
+    height: 1.2rem;
+}
+
+.visible-checkbox {
+    width: 1.2rem;
+    height: 1.2rem;
+    background-color: transparent;
+    border: 2px solid var(--white-dull-color);
+    margin-inline: .8rem 1.2rem;
+    cursor: pointer;
+    border-radius: .3rem;
+}
+
+.add-member-checkbox {
+    display: none;
+}
+
+.checkbox-container input[type="checkbox"]:checked + div {
+    background-color: var(--soft-aquamarine);
+    border-color: var(--soft-aquamarine);
+}
+
+.checkbox-container input[type="checkbox"]:checked + div::before {
+    content: url(http://localhost:5000/static/resources/check-solid.svg)
+}
+
+.visible-checkbox::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+}

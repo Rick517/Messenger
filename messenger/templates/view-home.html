@@ -1,0 +1,152 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='medium-popover.css')}}"  id="medium-popover-css-file">
+<section class="sidebar" id="sidebar">
+    <ul>
+        <li><p class='link'>
+            <i class="fa-solid fa-floppy-disk"></i>
+            Saved Messages
+        </p></li>
+        <li><a class='link' href="/contacts" id="contacts" data-routing-link>
+            <i class="fa-solid fa-address-book"></i>
+            Contacts
+        </a></li>
+        <li><a class='link' href="/settings" id="settings" data-routing-link>
+            <i class="fa-solid fa-gear"></i>
+            Settings & Profile
+        </a></li>
+        <li><p class='link'>
+            <i class="fa-solid fa-moon"></i>
+            Night Mode
+        </p></li>
+        <li>
+            <button popovertarget="report-bug-popover" class='link' aria-label="Report a bug" title="Report a bug">
+                <i class="fa-solid fa-bug"></i>
+                Report a Bug
+            </button>
+        </li>
+        <li><a class="logout link" href="{{url_for('logout')}}">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+        </a></li>
+    </ul>
+    <p class="version">Meesanger Web 3.2.7</p>
+    <div popover="auto" id="report-bug-popover" class="medium-popover">
+        <h3>Report a bug</h3>
+        <p>Help us make your exprience better</p>
+        <form method="post" action="" id="report-bug-form">
+            {{form.hidden_tag()}}
+            <fieldset>
+                <div class="input-container">
+                    {{ form.title(class="input-field", placeholder='Title Issue')}}
+                </div>
+                <div class="double-input-container">
+                    <div class="input-container">
+                        {{ form.device(class="input-field", placeholder='Your device')}}
+                    </div>
+                    <div class="input-container">
+                        {{ form.web_browser(class="input-field", placeholder='Your web browser')}}
+                    </div>
+                </div>
+                <div class="double-input-container">
+                    <div class="input-container">
+                        {{ form.country(class="input-field", placeholder='Your country')}}
+                    </div>
+                    <div class="input-container">
+                        {{ form.messenger_version(class="input-field", placeholder='Your version of Messenger')}}
+                    </div>
+                </div>
+                <div class="input-container textarea-container">
+                    {{ form.description(class="input-field", placeholder='Please explain the issue')}}
+                </div>
+            </fieldset>
+            <div class="actions">
+                <div class="" id="done-btn-wrapper">
+                    {{form.submit(class="uppercase-text submit-btn" )}}
+                </div>
+                <button type="reset" class="active-btn uppercase-text" id="cancel-btn" popovertarget="add-group-popover" popovertargetaction="hide" aria-label="Cancel" title="Cancel">Cancel</button>
+            </div>
+        </form>
+    </div>
+</section>
+<header>
+    <button class="button-circle" id="bar" aria-label="Open menu" title="Open menu">
+        <i class="bar fa-solid fa-bars" id="bar"></i>
+    </button>
+    <div class="search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Search" id="search">
+    </div>
+</header>
+<main id="main">
+    <!-- Using jinga2 instead of js request because of problems with SPA and initial pause to displaying -->
+    {% for chat in chats %}
+        <div id="{{chat.chat_id}}" class="person">
+            <a class="chat-link" href="/home/{{chat.chat_id}}" data-routing-link>
+                <img class="avatar" alt="avatar" src="{{chat.image}}" loading="lazy">
+                <article>
+                    <p class="name">{{chat.name}}</p>
+                    <p class="last-message">
+                        {{chat.last_message.author}}
+                        <span class="message">{{chat.last_message.message}}</span>
+                    </p>
+                </article>
+                <div class="unseen-messages-sign 
+                {% if chat.unseen_messages_exist <= 0 %} display-none {% endif %}"
+                >{{chat.unseen_messages_exist}}</div>
+            </a>
+        </div>
+    {% endfor %}
+</main>
+<div class="pen-container">
+    <div id="pen-container-click">
+        <i class="fa-solid fa-pen" id="pen"></i>
+        <i class="fa-solid fa-xmark" id="xmark"></i>
+    </div>
+    <ul class="actions" id="actions">
+        <li id="new-group">
+            <button popovertarget="add-group-popover" aria-label="Add group" title="Add group">
+                <i class="fa-solid fa-user-group"></i>
+                New group
+            </button>
+            <div popover="auto" id="add-group-popover" class="medium-popover">
+                <h3>New group</h3>
+                <div>
+                    <form class="add-group-form" method="post" id="group-form" action="/view/home">
+                        {{add_form.hidden_tag()}}
+                        <fieldset>
+                            <div class="image-container">
+                                <div class="image-wrapper" id="profile-image-wrapper" style="
+                                    background-image: url({{add_form.image.data}});
+                                ">
+                                    <i class="fa-solid fa-camera-retro upper-icon"></i>
+                                    {{ add_form.image(id="profile-file-input") }}
+                                </div>
+                            </div>
+                            <div class="input-container">
+                                {{ add_form.name(class="input-field", placeholder='Name', id='group-name-input')}}
+                            </div>
+                        </fieldset>
+                        <div class="actions">
+                            <div class="" id='done-group-button-container'>
+                                {{add_form.submit(class="uppercase-text submit-btn", id="done-group-button")}}
+                            </div>
+                            <button type="reset" class="active-btn uppercase-text" id="cancel-group" aria-label="Cancel" title="Cancel">Cancel</button>
+                        </div> 
+                    </form>
+                </div>
+            </div>
+        </li>
+        <li id="new-contact">
+            <a href="/contacts" data-routing-link>
+                <i class="fa-solid fa-user-large"></i>
+                New contact
+            </a>
+        </li>
+        <li id="new-message">
+            <i class="fa-solid fa-message"></i>
+            New message
+        </li>
+    </ul>
+</div>
+
+<script src="{{url_for('static', filename='js/home.js')}}"></script> 
+<script src="{{url_for('static', filename='js/edit-image-handler.js')}}"></script>

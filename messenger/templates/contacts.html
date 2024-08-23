@@ -1,0 +1,65 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='contacts.css')}}" id="contacts-css-file">
+<link rel="stylesheet" href="{{ url_for('static', filename='medium-popover.css')}}"  id="medium-popover-css-file">
+<header>
+    <a href="/home" class="button-circle" aria-label="Close section" title="Close section" data-routing-link>
+        <i class="fa-solid fa-arrow-left-long"></i>
+    </a>
+    <div class="search">
+        <i class="fa-solid fa-magnifying-glass" id="submit-search"></i>
+        <input type="text" placeholder="Search" id="search">
+    </div>
+</header>
+<main id="main">
+    <!-- Using jinga2 instead of js request because of problems with SPA and initial pause to displaying -->
+    <!-- TODO Contacts in url generated with page loading where contacts is location.pathname-->
+    {% for chat in chats %}
+        <div id="{{chat.chat_id}}" class="person">
+            <a class="chat-link" href="/contacts/{{chat.chat_id}}" data-routing-link>
+                <img class="avatar" alt="avatar" src="{{chat.image}}" loading="lazy">
+                <article>
+                    <p class="name">{{chat.name}}</p>
+                    <p class="last-message">
+                        {{chat.last_message.author}}
+                        <span class="message">{{chat.last_message.message}}</span>
+                    </p>
+                </article>
+                <div class="unseen-messages-sign 
+                {% if chat.unseen_messages_exist <= 0 %} display-none {% endif %}"
+                >{{chat.unseen_messages_exist}}</div>
+            </a>
+        </div>
+    {% endfor %}
+</main>
+<button popovertarget="add-user-popover" class="pen-container" id="pen-container"aria-label="Add user" title="Add user">
+    <i class="fa-solid fa-user-plus add-user-i"></i>
+</button>
+<div id="add-user-popover" class="medium-popover" popover="auto">
+    <h3>New Contact</h3>
+    <div>
+        <div class="image-container">
+            <img src="{{avatar}}" alt="avatar">
+        </div>
+        <form method="post" id="form">
+            {{form.hidden_tag()}}
+            <fieldset>
+                <div class="input-container">
+                    <!-- TODO fix autocomplete white lines -->
+                    {{ form.email(class="input-field", placeholder='Email Address')}}
+                </div>
+                <div class="input-container">
+                    {{ form.first_name(class="input-field", placeholder='First name (required)')}}
+                </div>
+                <div class="input-container">
+                    {{ form.last_name(class="input-field", placeholder='Last name (optional)')}}
+                </div>
+            </fieldset>
+            <div class="actions">
+                <div class="" id="done-btn-wrapper">
+                    {{form.submit(class="uppercase-text submit-btn", formaction="/view/contacts" )}}
+                </div>
+                <button type="reset" class="active-btn uppercase-text" id="cancel-btn" popovertarget="add-user-popover" popovertargetaction="hide"aria-label="Cancel" title="Cancel">Cancel</button>
+            </div> 
+        </form>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='js/contacts.js') }}"></script>

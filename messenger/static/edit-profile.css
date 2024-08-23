@@ -1,0 +1,167 @@
+.container {
+    overflow-y: scroll;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    height: 3.7rem;
+    padding-inline: .2rem;
+}
+
+.header h3 {
+    flex: 1;
+    color:white;
+    margin-left: .3rem;
+}
+
+
+.edit-chat-form fieldset {
+    border:none;
+    outline:none;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-inline: 1.3rem;
+}
+
+.edit-chat-form .image-container {
+    width: 100%;
+    padding-bottom: 1.2rem;
+}
+
+/* These image wrapper and other image classes are related to home view */
+
+.image-wrapper {
+    width: 7rem;
+    aspect-ratio: 1/1;
+    background-size: 100% 100%;
+    background-position: center;
+    position: relative;
+    font-size: 2.4rem;
+    border-radius: 50%;
+    margin: auto;
+    color:var(--brilliant-white-color);
+}
+
+.image-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+}
+
+.image-wrapper i, .image-wrapper input, .poping-submit-container i {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%)
+}
+
+.image-wrapper:hover i, .image-wrapper:active i {
+    font-size: 2.9rem;
+}
+
+.image-wrapper input {
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    cursor:pointer;
+    border-radius: 50%;
+}
+
+
+.edit-chat-form fieldset .input-container {
+    flex: 1;
+    margin-bottom: 1rem;;
+    width: 100%;
+}
+
+.edit-chat-form fieldset .input-description {
+    color: var(--text-gray-color);
+    font-size: .85rem;
+    float: left;
+    margin-bottom: .4rem;
+}
+
+fieldset input, fieldset textarea {
+    height: 100%;
+    width: 100%;
+    background-color: inherit;
+    color: var(--brilliant-white-color);
+    font-size: 1rem;
+    border: 1px solid var(--secondary-gray-color);
+    padding: .6rem;
+    border-radius: 15px / 15px;
+    resize: none;
+}
+
+fieldset .input:focus {
+    outline: 1px solid var(--brilliant-white-color);
+}
+
+.edit-chat-form .bio {
+    padding: 1rem .6rem;
+    font-size: .9rem;
+    font-weight: 400;
+    text-wrap: wrap;
+    overflow-y:hidden;
+}
+
+
+.edit-chat-form .poping-submit-container {
+    position:absolute !important;
+    bottom: 4rem;
+    right: 2rem;
+    width: 4.5rem;
+    aspect-ratio: 1/1;
+    background-color: var(--soft-aquamarine);
+    color:white;
+    border-radius: 50%;
+}
+
+.edit-chat-form .poping-submit-container::before {
+    position: absolute;
+    content: "";
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    transition: .1s ease;
+    border-radius: 50%;
+}
+
+.edit-chat-form .poping-submit-container:hover::before {
+    opacity: .3;
+}
+
+.edit-chat-form .poping-submit-container:active::before {
+    opacity: 1;
+}
+
+.edit-chat-form .poping-submit-container i {
+    font-size: 1.45rem;
+    pointer-events: none !important;
+    z-index: 5;
+}
+
+.edit-chat-form .poping-submit-container input {
+    opacity: 0;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+
+.black-line {
+    border: 7px solid var(--very-dark-color);
+}

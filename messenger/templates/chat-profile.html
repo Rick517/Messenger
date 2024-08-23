@@ -1,0 +1,51 @@
+<div class="header">
+    <button class="button-circle" id="close-chat-profile" aria-label="Close section" title="Close section">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+    <h3>{{'User' if user_info.type == 'contact' else 'Group'}} Info</h3>
+    <a href="/edit-chat" class="button-circle" aria-label="Edit chat" title="Edit chat"  data-button-link>
+        <i class="fa-solid fa-pencil"></i>
+    </a>
+</div>
+<div class="person-info">
+    <div class="avatar-background" style="
+        background-image: url({{user_info.avatar}});
+    ">
+        <div class="description">
+            <p class="name">{{user_info['title']}}</p>
+            <p class="status">{{user_info['members_or_status']}}</p>
+        </div>
+    </div>
+    {% if user_info.type == 'contact' %}
+        <div class="btn-container">
+            <button class="email-copy-btn" id="chat-profile-copy-button" aria-label="Edit chat" title="Edit chat">
+                <i class="fa-solid fa-envelope"></i>
+                <div>
+                    <p class="email" id="chat-profile-copy-text">{{user_info['email']}}</p>
+                    <p class="email-description">Email</p>
+                </div>
+            </button>
+        </div>
+    {% else %}
+        <div class="members-block">
+            <p class="members">Members</p>
+            <div class="members-container custom-scrollbar">
+                {% for member in user_info.members %}
+                    <div class="person">
+                        <a class="chat-link">
+                            <img class="avatar" alt="avatar" src="{{member.image}}">
+                            <article>
+                                <p class="name">{{member.name}}</p>
+                                <p class="status">{{member.status}}</p>
+                            </article>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+            <a class="add-member-popup pen-container" id="add-member-popup" href="/add-members" aria-label="Add members" title="Add members" data-button-link>
+                <i class="fa-solid fa-user-plus"></i>
+            </a>
+        </div>
+    {% endif %}
+</div>
+<script src="{{url_for('static', filename='js/chatProfile.js')}}"></script>

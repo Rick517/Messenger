@@ -1,0 +1,97 @@
+{% extends "login-layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static', filename='registration.css')}}">
+{% endblock %}
+
+{% block content %}
+<header>
+    <img src="{{url_for('static', filename='resources/logo.jpg')}}" alt="logo">
+    <a href="{{url_for('login')}}" class="question uppercase-text">Log In</a>
+</header>
+<main>
+    <div class="title">
+        Sign Up to Messanger
+    </div>
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            {% for category, m in messages %}
+                <!-- category is inherited -->
+                <p class="flash-message {{category}} minus-margin-top">{{ m }}</p> 
+            {% endfor %}
+        {% endwith %}
+        <div class="content">
+            <!-- Solution to form design
+            I could probably make three columsn for large screens
+            Two columsn for medium ones
+            And one column for phones -->
+            <form action="#" method="post">
+                {{ form.hidden_tag() }}
+                <fieldset>
+                    <div class="input-block">
+                        <p class="input-description uppercase-text">First Name</p>
+                        {{form.first_name()}}
+                    </div>
+                    {% for error in form.errors.first_name %}
+                        <p class="flash-message danger">{{ error }}</p>
+                    {% endfor %}
+                    <div class="input-block">
+                        <p class="input-description uppercase-text">Last Name</p>
+                        {{form.last_name()}}
+                    </div>
+                    {% for error in form.errors.last_name %}
+                        <p class="flash-message danger">{{ error }}</p>
+                    {% endfor %}
+                    <div class="input-block">
+                        <p class=" input-description uppercase-text">Email Address</p>
+                        {{form.email()}}
+                    </div>
+                    <!-- TODO +- fix this disgusting errors !!! (they are working! But the problem is only when you submit.) -->
+                    {% for error in form.errors.email %}
+                        <p class="flash-message danger">{{ error }}</p>
+                    {% endfor %}
+                    <div class="input-block password-block">
+                        <p class=" input-description uppercase-text">Password</p>
+                        <div class="password-container">
+                            {{form.password(class="password")}}
+                            <i class="fa-regular fa-eye" id="eye"></i>
+                        </div>
+                    </div>
+                    {% for error in form.errors.password %}
+                        <p class="flash-message danger minus-margin-bottom">{{ error }}</p>
+                    {% endfor %}
+                    <div class="input-block">
+                        <p class=" input-description uppercase-text">Confirm Password</p>
+                        {{form.confirm_password()}}
+                    </div>
+                    {% for error in form.errors.confirm_password %}
+                        <p class="flash-message danger minus-margin-bottom">{{ error }}</p>
+                    {% endfor %}
+                </fieldset>
+                <div class="input-block">
+                    <!-- Do I need a butotn? -->
+                    <button aria-label="Submit" title="Submit">{{form.submit(class="submit  input-description uppercase-text")}}</button>
+                </div>
+            </form>
+            <div class="break-line">
+                <span class="line"></span>
+                <p class="or-text uppercase-text">or</p>
+                <span class="line"></span>
+            </div>
+            <div class="other-options">
+                <a href="{{url_for('auth_google')}}">
+                    <button class="option-button" aria-label="Authenticate with Google" title="Authenticate with Google">
+                        <img src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png" alt="google-logo">
+                        <span class="option-text">Continue with Google</span>
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div> 
+    <aside class="footer">
+        <a href="#">Terms</a> & <a href="#">Privacy</a>
+    </aside>
+</main>
+<script src="{{url_for('static', filename='js/registration.js')}}"></script>
+{% endblock %}
+

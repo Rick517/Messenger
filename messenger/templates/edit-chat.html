@@ -1,0 +1,36 @@
+<div class="header">
+    <button class="button-circle" id="close-edit-chat" aria-label="Close section" title="Close section">
+        <i class="fa-solid fa-arrow-left-long"></i>
+    </button>
+    <h3>Edit Chat</h3>
+</div>
+<form method="post" action="/view/edit_chat" id="edit-chat-form" enctype="multipart/form-data" class="edit-chat-form">
+    {{ form.hidden_tag() }}
+    <fieldset>
+        <div class="image-container">
+            <div id="chat-image-wrapper" class="image-wrapper" style="
+                background-image: url({{form.avatar.data}});
+            ">
+                <i class="fa-solid fa-camera-retro upper-icon"></i>
+                {{ form.avatar(id="chat-file-input") }}
+            </div>
+        </div>
+
+        <div class="input-container">
+            <p class="input-description">First name (required)</p>
+            {{ form.first_name(value=form.first_name.data)}}
+        </div>
+        {% if form.last_name.data is not none %}
+        <div class="input-container">
+            <p class="input-description">Last name (optional)</p>
+            {{ form.last_name(value=form.last_name.data)}}
+        </div>
+        {% endif %}
+    </fieldset>
+    <div class="poping-submit-container">
+        <i class="fa-solid fa-check"></i>
+        {{ form.submit(class='edit-chat-submit') }}
+    </div>
+</form>
+<script src="{{url_for('static', filename='js/closeEditProfile.js')}}"></script>
+<script src="{{url_for('static', filename='js/editChat.js')}}"></script>

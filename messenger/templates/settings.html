@@ -1,0 +1,32 @@
+<div class="container custom-scrollbar">
+    <div class="header">
+        <a href="/home" class="button-circle" aria-label="Close section" title="Close section" data-routing-link>
+            <i class="fa-solid fa-arrow-left-long"></i>
+        </a>
+        <h3>Settings</h3>
+        <a href="/edit" class="button-circle" data-routing-link>
+            <i class="fa-solid fa-pencil"></i>
+        </a>
+    </div>
+    <div class="person-info">
+        <div class="avatar-background" style="
+            background-image: url({{user_info.avatar}});
+        ">
+            <div class="description">
+                <p class="name">{{user_info['name']}}</p>
+                <p class="status">online</p>
+            </div>
+        </div>
+        <div class="btn-container">
+            <button class="email-copy-btn" id="profile-copy-button"aria-label="Copy email" title="Copy email">
+                <i class="fa-solid fa-envelope"></i>
+                <div>
+                    <p class="email" id="profile-copy-text">{{user_info['email']}}</p>
+                    <p class="email-description">Email</p>
+                </div>
+            </button>
+        </div>
+    </div>
+    <div class="black-line"></div>
+</div>
+<script src="{{ url_for('static', filename='js/profile.js')}}"></script>

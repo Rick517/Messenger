@@ -1,0 +1,32 @@
+<div class="header">
+    <button class="button-circle" id="close-add-members" aria-label="Close section" title="Close section">
+        <i class="fa-solid fa-arrow-left-long"></i>
+    </button>
+    <h3>Add Members</h3>
+</div>
+<div class="members-search-container">
+    <input type="text" placeholder="Add users" id="add-members-search" />
+</div>
+<div class="members-block full-height-container">
+    <div class="members-container custom-scrollbar">
+        {% for member in members %}
+            <div class="person" data-peer-id="{{member.peer_id}}">
+                <label class="checkbox-container">
+                    <input class="add-member-checkbox" type="checkbox" />
+                    <div class="visible-checkbox"></div>
+                </label>
+                <a class="chat-link">
+                    <img class="avatar" alt='avatar' src="{{member.image}}">
+                    <article>
+                        <p class="name">{{member.name}}</p>
+                        <p class="status">{{member.status}}</p>
+                    </article>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+    <a class="add-member-popup pen-container overlay" aria-label="Add users" title="Add users" id="add-users-button">
+        <i class="fa-solid fa-arrow-right-long"></i>
+    </a>
+</div>
+<script src="{{url_for('static', filename='js/addMembers.js')}}"></script>

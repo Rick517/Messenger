@@ -1,0 +1,334 @@
+
+
+header {
+    display: flex;
+    width: 100%;
+    height: 4rem;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: .6rem;
+    margin-bottom: 6rem;
+}
+
+header img {
+    width: 5rem;
+    aspect-ratio: 1/1;
+}
+
+header a {
+    font-weight: 500;
+    color:var(--dark-text-color);
+    text-decoration: none;
+    padding-right: 1rem;
+}
+
+
+main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-inline: 15rem;
+}
+
+main .title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--dark-text-color);
+    margin-bottom: 2em;
+}
+
+.container  {
+    width: 100%;
+    display: flex;
+}
+
+main .content {
+    width: 53rem;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    flex: 1 1 0;
+}
+
+
+.content form {
+    flex: 1 1 0;
+}
+
+.content fieldset {
+    border:none;
+    color: var(--dark-text-color);
+}
+
+.content input {
+    border:none;
+    outline:none;
+    width: 100%;
+}
+
+.content fieldset input {
+    padding-left: .1em;
+    line-height: 2.4em;
+    margin-block: .4em;
+}
+
+.content fieldset .input-block {
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--lighter-text-color);
+}
+
+.content .input-description {
+    font-size: .85rem;
+    color: var(--lighter-text-color);
+}
+
+.content .input-block button {
+    border:none;
+    width: 100%;
+    height: 3.2em;
+    margin-top: .8em;
+}
+
+.content .input-block button .submit {
+    height:100%;
+    font-size: .85rem;
+    color: var(--lighter-text-color);
+    background-color: var(--light-text-color);
+    cursor:pointer;
+    transition: all .6s;
+    border-radius: 2px;
+}
+
+.content .input-block button .submit:hover {
+    background-color: var(--dark-text-color);
+    color: var(--light-text-color);
+}
+
+.content .break-line {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: .75rem;
+    line-height: 100%;
+    padding-inline: 3.2rem;
+}
+
+.content .break-line .or-text {
+    padding-block: .7rem;
+    color:var(--dark-text-color);
+}
+
+
+
+.content .other-options {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0;
+}
+
+.other-options img {
+    width: 2.6rem;
+    aspect-ratio: 1/1;
+    margin-right: .35em;
+}
+
+.other-options a {
+    text-decoration: none;
+}
+
+.other-options .option-button {
+    border: 2px solid var(--dark-text-color);
+    background-color: white;
+    color:var(--dark-text-color);
+    font-weight: 600;
+    transition: all .6s;
+    height: 4rem;
+    margin-bottom: 1rem;
+    cursor:pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+
+.other-options .option-button:hover {
+    background-color: var(--lighter-text-color);
+    color: var(--light-text-color);
+}
+
+.login-problem {
+    color: var(--dark-text-color);
+    border:none;
+    background-color: transparent;
+    margin-block: .65rem;
+    font-size: .96rem;
+    cursor:pointer;
+    font-weight: 500;
+    transition: .2s ease;
+    padding: .3rem .6rem;
+}
+
+.login-problem:hover {
+    color:var(--soft-blue-color)
+}
+
+main aside, main aside a {
+    color: var(--lighter-text-color);
+    font-size: .95rem;;
+}
+
+/* Popover */
+
+#email-input-popover {
+    margin: auto !important;
+    border: 2px solid var(--dark-text-color);
+    box-shadow: 0 0 20px 4px rgba(255, 255, 255, 0.15);
+    transition: all .5s;
+    user-select: none;
+
+    &:popover-open {
+        display: flex;
+        animation: appear .3s ease-in-out;
+    }
+
+    &::backdrop {
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: scale(.5, .5);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1, 1);
+    }
+}
+
+#email-input-popover img {
+    height: 21.5rem;
+}
+
+#email-input-popover article {
+    text-align: center;
+    width: 20rem;
+}
+
+
+#email-input-popover h2 {
+    margin-top: 1.75em;
+    margin-bottom: .2em;
+}
+
+#email-input-popover .comment {
+    color: var(--lighter-text-color);
+    font-size: .85rem;;
+    margin-bottom: 2.7em;
+}
+
+#email-input-popover .input-block.email {
+    width: 13.9rem;
+    height: 4.2rem;
+    text-align: center;
+    margin-inline:auto;
+    margin-bottom: 1em;
+    border-bottom: 1px solid var(--lighter-text-color);
+
+}
+
+#email-input-popover .email .input-description {
+    font-size: .85rem;
+    color: var(--dark-text-color);
+    margin-bottom: .6rem;
+}
+
+#email-input-popover .email-input {
+    outline:none;
+    border:none;
+    width: 100%;
+    height: 2rem;
+    padding-left:.2rem;
+    user-select: initial;
+}
+
+#email-input-popover .submit {
+    background-color: var(--soft-blue-color);
+    color: white;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    padding: .7rem 4.83rem;
+    margin-bottom: 1rem;
+    cursor:pointer;
+    transition: .3s;
+}
+
+#email-input-popover .submit:hover {
+    opacity: .7;
+}
+
+#email-input-popover .links {
+    width: 100%;
+}
+
+#email-input-popover a {
+    text-decoration: none;
+    color: var(--light-text-color);
+    padding: .5rem .7rem;
+    background-color: var(--darker-color);
+    cursor:pointer;
+    border: 1px solid var(--light-text-color);
+    transition: .3s;
+    font-size: .9rem;
+}
+
+#email-input-popover a:hover {
+    background-color: var(--light-text-color);
+    color: var(--dark-text-color);
+    border: 1px solid var(--darker-color);
+}
+
+
+
+/* MEDIA */
+
+
+@media (max-width: 1440px) {
+    main {
+        padding-inline: 8rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .container .content {
+        display: flex;
+        flex-direction: column;
+        width: 40rem;
+    }
+
+    main {
+        padding-inline: 5rem;
+    }
+
+    .or-text {
+        margin-block: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    main {
+        padding-inline: 3rem;
+    }
+}
+
+@media (max-width: 425px) {
+    main {
+        padding-inline: 1.5rem;
+    }
+}

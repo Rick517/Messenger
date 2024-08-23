@@ -1,0 +1,105 @@
+<!-- 
+If using jinja:
+    Note: the chat_info is delivered from chat-_ inside here! 
+Else:
+    We don't need to use jinja because the only difference in chat is button to block/leave.
+
+- Chat block is eqaul to blocked contact and leaved group.
+-->
+<div class="right-container">
+    <div class="chat-header">
+        <button class="close-left button-circle" id="close-left" aria-label="Close section" title="Close section">
+            <i class="fa-solid fa-arrow-left-long"></i>
+        </button>
+        {% block head %}{% endblock %}
+        <img class="avatar" alt="avatar" src="{{chat_info['avatar']}}">
+        <a href="/chat-profile" class="description" data-button-link>
+            <p class="title">{{chat_info['title']}}</p>
+            <p class="people">{{chat_info.get('members_or_status', "")}}</p>
+        </a>
+        <button class="settings button-circle" popovertarget="chat-settings" id="settings-button" aria-label="Open chat settings" title="Open chat settings">
+            <i class="fa-solid fa-ellipsis-vertical"></i>
+        </button>
+        <button class="display-none" id="close-settings" popovertarget="chat-settings" popovertargetaction="hide"></button>
+        <div class="chat-settings message-popover chat-popover" popover="auto" id="chat-settings">
+            <button class="first-button" aria-label="Edit chat" title="Edit chat">
+                <a href="/edit-chat" data-button-link id="open-edit-chat">
+                    <i class="fa-solid fa-pencil"></i>
+                    Edit
+                </a>
+            </button>
+            {% if chat_info.type == 'contact' %}
+            <button id="block-user" aria-label="Block user" title="Block user">
+                <i class="fa-solid fa-ban"></i>
+                {% if chat_info.blocked %} Unblock {%else%} Block {% endif %} user
+            </button>
+            {% endif %}
+            <button id="open-assurement" class="delete-button" popovertarget="delete-chat-popover" aria-label="Delete chat" title="Delete chat">
+                <i class="fa-solid fa-trash"></i>
+                {% if chat_info.type == 'contact' %}Delete chat{% else %}Delete and Exit{% endif %}
+            </button>
+            <div popover="auto" class="medium-popover delete-chat-popover" id="delete-chat-popover">
+                <h3>Delete the chat</h3>
+                <p>This will delete the chat and all its history</p>
+                <div>
+                    <button class="cancel-button" popovertarget="delete-chat-popover" popovertargetaction="hide"aria-label="Cancel" title="Cancel">Cancel</button>
+                    <button class="confirm-button" id="delete-chat-button" popovertarget="delete-chat-popover" popovertargetaction="hide"aria-label="Approve" title="Approve">Eliminate</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content custom-scrollbar
+    {% if chat_info.blocked %} full-height {% endif %}" 
+    id="scroll-container">
+        <!-- These two divs of every message are needed for disagn and js rendering -->
+        <div class="messages-container" id="messages-container"></div>
+        <!-- No click is possible because display is none -->
+        <button id="btn-message-popover" class="display-none" popovertarget="message-popover" popovertargetaction="show"></button>
+        <!-- The button forward cannot be used because of closing functionality (container activates). -->
+        <button class="display-none" id="btn-forward-popover" popovertarget="forward-popover" popovertargetaction="show"></button>
+        <div class="message-popover chat-popover" id="message-popover" popover="auto">
+            <button id="copy-text-button"aria-label="Copy text" title="Copy text">
+                <i class="fa-regular fa-copy"></i>
+                Copy
+            </button>
+            <button id="forward-button"aria-label="Forward message" title="Forward message">
+                <i class="fa-solid fa-share"></i>
+                Forward
+            </button>
+            <button id="delete-button" class="delete-button"aria-label="Delete" title="Delete">
+                <i class="fa-solid fa-trash"></i>
+                Delete
+            </button>
+        </div>
+        <div id="forward-popover" class="chat-popover forward-popover" popover="auto">
+            <p class="display-none" id="for-forward-container"></p>
+            <nav>
+                <!-- reset in order to reset the search input -->
+                <button id="forward-popover-close" type="reset" class="button-circle"aria-label="Cancel" title="Cancel">
+                    <i class="fa-solid fa-xmark" id="xmark"></i>
+                </button>
+                <div class="search">
+                    <input class="search" type="text" placeholder="Forward To" autofocus id="forward-search">
+                </div>
+            </nav>
+            <section class="forward-options" id="forward-options"></section>
+        </div>
+    </div>
+    {% if not chat_info.blocked %}
+        <div class="input-container">
+            <input class="message-input" type="text" placeholder="Message" id="message-input">
+            <button type="submit" id="submit-message" class="submit"aria-label="Submit" title="Submit">
+                <i class="fa-regular fa-paper-plane"></i>
+            </button>
+        </div>
+    {% else %}
+    {% endif %}
+</div>
+<div class="right-sidebar" id="right-sidebar"></div>
+<script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+{% if not chat_info.blocked %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+<script src="{{ url_for('static', filename='js/chat-socket.js') }}"></script>
+{% endif %}
+
+

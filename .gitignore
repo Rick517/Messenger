@@ -1,0 +1,9 @@
+node_modules/
+product_plan/
+__pychache__/
+.env
+client_secret.json
+instance/
+instance
+dump.rdb
+dump

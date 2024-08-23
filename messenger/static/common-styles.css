@@ -1,0 +1,75 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Poppins, Arial, Helvetica, sans-serif;
+}
+
+:root {
+    --dark-text-color: #37474F;
+    --darker-color: #2d2c2c;
+    --light-text-color: #FAFAFA;
+    --less-light-color:#ecf0ec;
+    --medium-light-color:#dfe1df;
+    --lighter-text-color: #9E9E9E;
+    --danger-color: #c91d12;
+    --green-light-color: #2eb774;
+    --soft-blue-color: #6488EA;
+    --deep-blue-color: #0013de;
+}
+
+.flash-message {
+    width: 100%;
+    border: 1px solid;
+    font-size: .8rem;
+}
+
+.line {
+    border: 1px solid var(--light-text-color);
+    flex: 100%;
+}
+
+.uppercase-text {
+    text-transform: uppercase;
+}
+
+.flash-message {
+    width: 100%;
+    padding-block: .5em;
+    font-size: .82rem;
+    font-weight: 400;
+    padding-left: 1em;
+    display: flex;
+    margin-block: -.5em 1.2em;
+    border: 1px solid;
+}
+
+.danger {
+    border-color: var(--danger-color);
+    color:var(--danger-color);
+}
+
+.success {
+    border-color: var(--green-light-color);
+    color:var(--green-light-color);
+}
+
+.password-container {
+    display: flex;
+}
+
+input.password {
+    display: inline;
+}
+
+.password-container i {
+    padding-inline: 1em;
+    margin-block: auto;
+    color:black;
+    cursor:pointer;
+}
+
+.password-container i.fa-eye-slash {
+    margin-right: -1px;
+}
+
