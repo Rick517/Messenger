@@ -48,7 +48,7 @@ redis = Redis(host='localhost', port=6379, decode_responses=True)
 # Every deletion, editing and adding touches every user.
 # I set message and author: user_id in group_chats. On get history and check and add a css-class=mine when equaled.
 # To implement delete, edit with only by yourself a set with (user_id, message (by author)) should be created and checked every time.
-mongo_cluster = MongoClient('mongodb://localhost:27017/')
+mongo_cluster = MongoClient(os.getenv('MONGO_PRODUCTION_CLUSTER_URI'))
 mongo_db = mongo_cluster['messenger']
 group_chats = mongo_db['groups_history']
 contact_chats = mongo_db['contacts_history']
