@@ -2,7 +2,6 @@ from flask import Flask, url_for
 from flask_sqlalchemy import SQLAlchemy
 from google_auth_oauthlib.flow import Flow
 import os
-import pathlib
 from flask_mailman import Mail
 from flask_socketio import SocketIO
 from datetime import timedelta
@@ -20,7 +19,7 @@ app.config ['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///messenger.sqlite3'
 db = SQLAlchemy(app)
 
 GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID')
-os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1" # to allow Http traffic for local dev (instead of https)
+#os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1" # to allow Http traffic for local dev (instead of https)
 client_secrets_file = os.getenv('GOOGLE_CLIENT_SECRETS')
 
 
@@ -41,8 +40,8 @@ socketio = SocketIO(app)
 REFRESH_TOKEN_EXPIRATION = timedelta(days=30)
 ACCESS_TOKEN_EXPIRATION = timedelta(minutes=15)
 
-# Prerequisite: initialize redis-server via ubuntu.
-redis = Redis(host='localhost', port=6379, decode_responses=True)
+# Prerequisite: initialize redis-server via ubuntu (for development).
+redis = Redis(host=os.getenv('REDIS_RENDER_URI'), port=6379, decode_responses=True)
 
 # There is always one chat for all users.
 # Every deletion, editing and adding touches every user.
