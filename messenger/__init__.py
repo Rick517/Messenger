@@ -22,6 +22,11 @@ GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID')
 #os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1" # to allow Http traffic for local dev (instead of https)
 google_client_secrets = os.getenv('GOOGLE_CLIENT_SECRETS')
 
+if not os.path.exists(google_client_secrets):
+    print(f"File not found: {google_client_secrets}")
+else:
+    print(f"File found: {google_client_secrets}")
+
 scopes = ["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email", "openid"]
 flow = Flow.from_client_secrets_file(client_secrets_file=google_client_secrets, scopes=scopes, redirect_uri='http://localhost:5000/auth/google/callback')
 
