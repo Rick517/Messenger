@@ -19,7 +19,7 @@ app.config ['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///messenger.sqlite3'
 db = SQLAlchemy(app)
 
 GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID')
-#os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1" # to allow Http traffic for local dev (instead of https)
+os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1" # to allow Http traffic for local dev (instead of https)
 google_client_secrets = os.getenv('GOOGLE_CLIENT_SECRETS', '/etc/secrets/client_secret.json')
 print(os.getenv('GOOGLE_CLIENT_SECRETS'))
 
