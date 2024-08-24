@@ -12,7 +12,7 @@ export default class {
         .then(data => {
             return data;
         })
-        .catch(err => //console.log(err));
+        .catch(err => console.error(err));
 
         ////console.log(result);
         return result;
