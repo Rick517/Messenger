@@ -260,12 +260,12 @@ def callback():
     access_token = create_jwt_token(user.user_id, ACCESS_TOKEN_EXPIRATION)
     refresh_token = create_jwt_token(user.user_id, REFRESH_TOKEN_EXPIRATION, refresh=True)
 
-    print(access_token, refresh_token)
+    print(access_token, refresh_token, flush=True)
 
     # TODO is there any way not to replicate this?
-    print(url_for('home'))
+    print(url_for('home'), flush=True)
     response = redirect('https://messenger-s3fg.onrender.com/home')
-    print(response, url_for('home'))
+    print(response, url_for('home'), flush=True)
     response.set_cookie('access-token', access_token, httponly=True)
     response.set_cookie('refresh-token', refresh_token, httponly=True)
 
