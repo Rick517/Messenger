@@ -253,7 +253,7 @@ def callback():
     # TODO here's probably should be a refresh token function
     if not user:
         avatar = get_random_avatar()
-        user = User(first_name=user_info['given_name'], last_name=user_info['family_name'], email=email, avatar=avatar, bio="")
+        user = User(first_name=user_info['given_name'], last_name=user_info['family_name'], email=email, avatar=avatar, bio="", last_seen="#")
         db.session.add(user)
         db.session.commit()
 
