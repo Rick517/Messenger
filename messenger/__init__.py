@@ -1,4 +1,4 @@
-from flask import Flask, url_for
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from google_auth_oauthlib.flow import Flow
 import os
