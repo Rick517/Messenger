@@ -20,11 +20,10 @@ db = SQLAlchemy(app)
 
 GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID')
 #os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1" # to allow Http traffic for local dev (instead of https)
-client_secrets_file = os.getenv('GOOGLE_CLIENT_SECRETS')
-
+google_client_secrets = os.getenv('GOOGLE_CLIENT_SECRETS')
 
 scopes = ["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email", "openid"]
-flow = Flow.from_client_secrets_file(client_secrets_file=client_secrets_file, scopes=scopes, redirect_uri='http://localhost:5000/auth/google/callback')
+flow = Flow.from_client_secrets_file(client_secrets_file=google_client_secrets, scopes=scopes, redirect_uri='http://localhost:5000/auth/google/callback')
 
 mail = Mail()
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
