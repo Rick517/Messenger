@@ -263,9 +263,8 @@ def callback():
     print(access_token, refresh_token, flush=True)
 
     # TODO is there any way not to replicate this?
-    print(url_for('home'), flush=True)
+    # qq How to use logging in Render.com?
     response = redirect('https://messenger-s3fg.onrender.com/home')
-    print(response, url_for('home'), flush=True)
     response.set_cookie('access-token', access_token, httponly=True)
     response.set_cookie('refresh-token', refresh_token, httponly=True)
 

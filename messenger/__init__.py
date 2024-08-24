@@ -43,6 +43,8 @@ ACCESS_TOKEN_EXPIRATION = timedelta(minutes=15)
 
 # Prerequisite: initialize redis-server via ubuntu (for development).
 redis = Redis(host=os.getenv('REDIS_RENDER_URI'), port=6379, decode_responses=True)
+print(os.getenv('REDIS_RENDER_URI'), flush=True)
+print(redis, flush=True)
 
 # There is always one chat for all users.
 # Every deletion, editing and adding touches every user.
