@@ -209,7 +209,7 @@
 }
 
 .checkbox-container input[type="checkbox"]:checked + div::before {
-    content: url(http://localhost:5000/static/resources/check-solid.svg)
+    content: url(https://messenger-s3fg.onrender.com/static/resources/check-solid.svg)
 }
 
 .visible-checkbox::after {

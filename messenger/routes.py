@@ -261,7 +261,8 @@ def callback():
     refresh_token = create_jwt_token(user.user_id, REFRESH_TOKEN_EXPIRATION, refresh=True)
 
     # TODO is there any way not to replicate this?
-    response = redirect(url_for('home'))
+    print(url_for('home'))
+    response = redirect('https://messenger-s3fg.onrender.com/home')
     response.set_cookie('access-token', access_token, httponly=True)
     response.set_cookie('refresh-token', refresh_token, httponly=True)
 
@@ -731,6 +732,7 @@ def report_bug(user):
 
 
 @app.route('/', defaults={'path': ''})
+@app.route('/home')
 @app.route('/<path:path>')
 @jwt_required
 def home(user, path):
