@@ -13,7 +13,6 @@
     <div class="title">
         Log into Messanger
     </div>
-    <!-- qq How to get flask messages with inherit class-style: algorithms and implementation? -->
     {% with messages = get_flashed_messages(with_categories=True) %}
         {% for category, m in messages %}
             <p class="flash-message {{category}}">{{ m }}</p> 
