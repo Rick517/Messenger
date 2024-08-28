@@ -613,7 +613,7 @@ def generate_data_for_chat(chat, user_id):
     if len(unit['name']) > 28: 
         unit['name'] = unit['name'][:25] + '...'
 
-    last_timestamp = chat['unseen_messages_by_user'][f'{user_id}']
+    last_timestamp = chat['unseen_messages_by_user'].get(f'{user_id}')
     unseen_count = get_count_unseen_messages(chat['messages'], last_timestamp)
     #print('UNSEEN COUNT FOR PERSON', unseen_count)
     unit['unseen_messages_exist'] = unseen_count

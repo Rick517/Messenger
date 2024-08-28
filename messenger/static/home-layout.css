@@ -25,7 +25,7 @@ body {
     background: url("./resources/dark-background.jpg") no-repeat;
     background-size: cover;
     background-position: end;
-    overflow: hidden;
+    overflow: auto;
 }
 
 body::before {
@@ -82,8 +82,7 @@ body::before {
     height:100vh;
     flex: 1;
     position:relative;
-    overflow-y:hidden;
-    overflow-x:hidden;
+    overflow:hidden;
     display: flex;
     z-index: 100;
 }
