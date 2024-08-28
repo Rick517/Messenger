@@ -25,7 +25,8 @@ body {
     background: url("./resources/dark-background.jpg") no-repeat;
     background-size: cover;
     background-position: end;
-    overflow-y: hidden;
+    scrollbar-width: none;
+    max-height: 100vh;
 }
 
 body::before {
