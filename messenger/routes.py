@@ -96,7 +96,7 @@ def jwt_required(f):
         response = decode_jwt_token(token)
         #print('Decorator. The returned response is:', response)
         if response == 'invalid':
-            flash("Invalid token. Please log in again.", "info")
+            flash("Invalid token. Please log in again.", "danger")
             response = redirect(url_for('login'))
             response.delete_cookie('access-token')
             return response
@@ -245,7 +245,8 @@ def callback():
         )
     except Exception as e:
         #print(e)
-        return url_for('login', message='Invalid token. Please try again.')
+        flash('Invalid token. Please try again.', 'danger')
+        return url_for('login')
 
     #print(user_info)
     email = user_info['email']
@@ -319,7 +320,7 @@ def refresh():
         response = decode_jwt_token(refresh_token, refresh=True)
         if response in ['invalid', 'expired']:
             #print('The refresh token is invalid.')
-            flash(invalid_message, "info")
+            flash(invalid_message, "danger")
             return invalid_response
         #print('Started to refresh token...')
         user_id = response.user_id
