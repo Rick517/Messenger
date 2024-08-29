@@ -476,6 +476,10 @@
         width: 35.5rem !important;
     }
 
+    .right-container .content {
+        height: 79.5vh;
+    }
+
     .right-container .message-input {
         max-width: 30rem !important;
         min-width: 30rem !important;
