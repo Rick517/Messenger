@@ -481,13 +481,6 @@ body::before {
 
 /* MEDIA */
 
-@media (max-width: 1023px) {
-    .left {
-
-    }
-
-}
-
 @media (max-width: 426px) {
     body > section {
         width: 100%;
