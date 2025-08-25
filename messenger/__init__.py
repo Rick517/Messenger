@@ -31,8 +31,8 @@ flow = Flow.from_client_secrets_file(client_secrets_file=google_client_secrets, 
 mail = Mail()
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
-app.config['MAIL_USERNAME'] = 'sky.above.skyyy@gmail.com'
-app.config['MAIL_PASSWORD'] = os.environ.get('GMAIL_SECRET_SKY')
+app.config['MAIL_USERNAME'] = os.environ.get('GMAIL_SERVER_ADDRESS')
+app.config['MAIL_PASSWORD'] = os.environ.get('GMAIL_SERVER_SECRET')
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = False
 mail.init_app(app)
