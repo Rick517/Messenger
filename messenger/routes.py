@@ -16,10 +16,10 @@ import requests
 from pip._vendor import cachecontrol
 from google.auth.transport.requests import Request
 from google.oauth2 import id_token
+from oauthlib.oauth2.rfc6749.errors import MismatchingStateError
 from flask_socketio import Namespace, emit
 from werkzeug.datastructures import MultiDict
 import json
-
 
 
 def redirect_to_email_confirmation(user, route_function, comment='Confirmation', next_page=None):
@@ -225,28 +225,33 @@ def auth_google():
 
 @app.route('/auth/google/callback')
 def callback():
-    flow.fetch_token(authorization_response=request.url)
-
-    state = request.args.get('state')
-    if not(session.get('state') == state):
-        return url_for('login', message='Invalid state. Please try again.')
-    
-    credentials = flow.credentials
-    
-    request_session = requests.session()
-    cached_session = cachecontrol.CacheControl(request_session)
-    token_request = Request(session=cached_session)
-
     try:
+        flow.fetch_token(authorization_response=request.url)
+
+        state = request.args.get('state')
+        if not(session.get('state') == state):
+            return url_for('login', message='Invalid state. Please try again.')
+        
+        credentials = flow.credentials
+        
+        request_session = requests.session()
+        cached_session = cachecontrol.CacheControl(request_session)
+        token_request = Request(session=cached_session)
+
         user_info = id_token.verify_oauth2_token(
             id_token=credentials.id_token,
             audience=GOOGLE_CLIENT_ID,
             request=token_request
         )
+
+    except MismatchingStateError:
+        flash('Authentication failed: Session expired or invalid state. Please make sure you have an account or try again.', 'danger')
+        return redirect(url_for('login'))
+    
     except Exception as e:
-        #print(e)
-        flash('Invalid token. Please try again.', 'danger')
-        return url_for('login')
+        app.logger.error(f"OAuth error: {e}")
+        flash('Authentication failed. Please try again.', 'danger')
+        return redirect(url_for('login'))
 
     #print(user_info)
     email = user_info['email']
