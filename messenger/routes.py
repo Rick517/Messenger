@@ -54,7 +54,7 @@ def create_jwt_token(user_id: int, expiration_time, refresh=False) -> str:
         return None
     return token
 
-def decode_jwt_token(token: str, secret_key=app.secret_key, algorithms=['HS256'], refresh=False) -> int:
+def decode_jwt_token(token: str, secret_key=app.secret_key, algorithms=['HS256'], refresh=False):
     try:
         #print('The got token to decode is:', token)
         sign = is_token_valid(token)
