@@ -259,7 +259,26 @@ def callback():
     # TODO here's probably should be a refresh token function
     if not user:
         avatar = get_random_avatar()
-        user = User(first_name=user_info['given_name'], last_name=user_info['family_name'], email=email, avatar=avatar, bio="", last_seen="#")
+        first_name = user_info.get('given_name', '')
+        last_name = user_info.get('family_name', '')
+        
+        if not first_name and 'name' in user_info:
+            name_parts = user_info['name'].split(' ', 1)
+            first_name = name_parts[0]
+            if len(name_parts) > 1:
+                last_name = name_parts[1]
+        
+        if not first_name:
+            first_name = email.split('@')[0]  
+        
+        user = User(
+            first_name=first_name, 
+            last_name=last_name, 
+            email=email, 
+            avatar=avatar, 
+            bio="", 
+            last_seen="#"
+        )
         db.session.add(user)
         db.session.commit()
 
